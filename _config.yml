@@ -1,6 +1,8 @@
 safe: true
 markdown: kramdown
-highlighter: pygments
+kramdown:
+        input: GFM
+highlighter: null
 permalink: /:title.html
 relative_permalinks: false
 
@@ -10,12 +12,12 @@ default_lang: en
 default_body_class: list
 
 author:
-    name: Yours Truly
-    # url:  http://example.com/
+    name: Julien Tanguy
+    url:  http://julien.jhome.fr
     company:
-        name: Famous Inc.
-        # url:  http://example.com/
+        name: Sounderbox
+        url:  http://sounderbox.com
 
 fork_url: https://github.com/shower/shower
 progress: true
-line_numbers: true
+line_numbers: false
