@@ -46,6 +46,12 @@ style: |
     .slide.small pre code {
       line-height: 30px;
     }
+    .slide.smaller {
+      font-size: 60%;
+    }
+    .slide.smaller pre code {
+      line-height: 20px;
+    }
 ---
 
 # Introduction to<br/> Webpack {#Cover}
@@ -160,6 +166,85 @@ require.ensure([], function(require) {
   const d3 = require('d3')
   //do d3 stuff
   })
+~~~
+
+## Configuration
+{:.small}
+
+~~~javascript
+module.exports = {
+    entry: { /* Entry points */ },
+    resolve: { /* File resolver */ },
+    output: { /* Output config*/ },
+    devServer: { /**/ },
+    module: {
+        loaders: [ /* loaders */ ],
+        plugins: [ /* plugins */ ]
+    }
+~~~
+
+## Entry points and resolvers
+
+~~~javascript
+entry: {
+    bundle: "./src/index.js",
+},
+resolve: {
+    extensions: ["", ".js", ".jsx", ".css", ".scss"]
+},
+~~~
+
+## Output and devServer
+
+~~~javascript
+output: {
+    path: path.join(__dirname, 'dist'),
+    filename: "[name].js",
+},
+devServer: {
+    outputPath: path.join(__dirname, 'dist')
+},
+~~~
+
+## Loaders
+{:.smaller}
+
+~~~javascript
+{
+    test: /\.scss|\.css$/,
+    loader: "style!css!sass"
+},
+{
+    test: /\.js/,
+    exclude: /(node_modules|bower_components)/,
+    loader: "babel",
+    query: {
+        presets: ["es2015"]
+    }
+},
+{
+    test: /\.png|\.svg|\.jpg$/,
+    loader: "url-loader",
+    query: {
+        limit: 100000 /*100 kb*/
+    }
+},
+~~~
+
+## Plugins
+{:.small}
+
+~~~javascript
+new webpack.DefinePlugin({
+    __DEVELOPMENT__: JSON.stringify(
+        process.env.NODE_ENV === 'development' )
+}),
+new HtmlWebpackPlugin({
+    title: 'My application',
+    appMountId: 'app',
+    inject: false,
+    template: path.join(__dirname, 'assets', 'index.html')
+})
 ~~~
 
 ## ![](pictures/webpack-logo.png)
